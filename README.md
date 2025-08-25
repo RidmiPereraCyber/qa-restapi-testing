@@ -128,8 +128,98 @@ python main.py
 <img width="955" height="482" alt="image" src="https://github.com/user-attachments/assets/1cbb9c4d-5749-4526-86a8-a21329623fea" />
 
 # Pytest Unit Testing (Automated)
+This Flask application includes unit tests using pytest to ensure that all API endpoints work correctly. The tests use Flask’s built-in test_client and an in-memory SQLite database to avoid modifying your actual database.
 
+## How It Works
 
+### Client Fixture
+
+**@pytest.fixture
+def client():
+    app.config["TESTING"] = True
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
+    ...**   
+    
+- Sets the Flask app in testing mode.
+- Uses an in-memory SQLite database for isolated tests.
+- Creates a sample destination (Eiffel Tower) before running tests.
+- Drops all tables after the tests to clean up.
+
+### Test Home Route
+
+**def test_home(client):
+    res = client.get("/")
+    assert res.status_code == 200
+    assert res.get_json()["message"] == "Welcome to the travel API"**
+
+- Sends a GET request to /.
+- Checks that the status code is 200.
+- Validates the returned JSON message.
+### Test Getting All Destinations
+**
+def test_get_destinations(client):
+    res = client.get("/destinations")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert len(data) == 1
+    assert data[0]["destination"] == "Eiffel Tower"**
+
+- Sends a GET request to /destinations.
+- Confirms the response contains the pre-populated destination.
+### Test Getting a Single Destination
+**
+def test_get_single_destination(client):
+    res = client.get("/destinations/1")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["country"] == "France"**
+
+- Requests /destinations/1.
+- Checks that the correct destination is returned.
+
+### Test Adding a New Destination
+
+**def test_add_destination(client):
+    res = client.post("/destinations", json={
+        "destination": "Great Wall",
+        "country": "China",
+        "rating": 4.7
+    })
+    assert res.status_code == 201
+    data = res.get_json()
+    assert data["destination"] == "Great Wall"**
+    
+- Sends a POST request to add a new destination.
+- Validates that it is created successfully with status 201.
+
+### Test Updating a Destination
+
+**def test_update_destination(client):
+    res = client.put("/destinations/1", json={
+        "destination": "Eiffel Tower Updated",
+        "rating": 5.0
+    })
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["destination"] == "Eiffel Tower Updated"
+    assert data["rating"] == 5.0**
+
+- Sends a PUT request to update an existing destination.
+- Confirms the destination and rating are updated in the response.
+
+### Test Deleting a Destination
+
+**def test_delete_destination(client):
+    res = client.delete("/destinations/1")
+    assert res.status_code == 200
+    assert res.get_json()["message"] == "Destination was deleted"
+
+    res = client.get("/destinations/1")
+    assert res.status_code == 404**
+
+- Deletes the destination at /destinations/1.
+- Confirms deletion with a success message.
+- Verifies that subsequent GET requests return 404.
 
 
 
