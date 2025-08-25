@@ -134,11 +134,12 @@ This Flask application includes unit tests using pytest to ensure that all API e
 
 ### Client Fixture
 
-**@pytest.fixture
+**```python
+@pytest.fixture
 def client():
     app.config["TESTING"] = True
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
-    ...**   
+    ...**
     
 - Sets the Flask app in testing mode.
 - Uses an in-memory SQLite database for isolated tests.
@@ -147,7 +148,8 @@ def client():
 
 ### Test Home Route
 
-**def test_home(client):
+**```python
+def test_home(client):
     res = client.get("/")
     assert res.status_code == 200
     assert res.get_json()["message"] == "Welcome to the travel API"**
@@ -156,7 +158,8 @@ def client():
 - Checks that the status code is 200.
 - Validates the returned JSON message.
 ### Test Getting All Destinations
-**
+
+**```python
 def test_get_destinations(client):
     res = client.get("/destinations")
     assert res.status_code == 200
@@ -167,7 +170,8 @@ def test_get_destinations(client):
 - Sends a GET request to /destinations.
 - Confirms the response contains the pre-populated destination.
 ### Test Getting a Single Destination
-**
+
+**```python
 def test_get_single_destination(client):
     res = client.get("/destinations/1")
     assert res.status_code == 200
@@ -179,7 +183,8 @@ def test_get_single_destination(client):
 
 ### Test Adding a New Destination
 
-**def test_add_destination(client):
+**```python
+def test_add_destination(client):
     res = client.post("/destinations", json={
         "destination": "Great Wall",
         "country": "China",
@@ -194,7 +199,8 @@ def test_get_single_destination(client):
 
 ### Test Updating a Destination
 
-**def test_update_destination(client):
+**```python
+def test_update_destination(client):
     res = client.put("/destinations/1", json={
         "destination": "Eiffel Tower Updated",
         "rating": 5.0
@@ -209,7 +215,8 @@ def test_get_single_destination(client):
 
 ### Test Deleting a Destination
 
-**def test_delete_destination(client):
+**```python
+def test_delete_destination(client):
     res = client.delete("/destinations/1")
     assert res.status_code == 200
     assert res.get_json()["message"] == "Destination was deleted"
@@ -221,6 +228,11 @@ def test_get_single_destination(client):
 - Confirms deletion with a success message.
 - Verifies that subsequent GET requests return 404.
 
+## Results
+
+-- All the tests were passed correctly
+
+<img width="948" height="997" alt="image" src="https://github.com/user-attachments/assets/65a23b7c-e3cf-454d-a9dc-5e4e1d6c7d50" />
 
 
 
