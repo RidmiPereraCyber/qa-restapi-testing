@@ -90,6 +90,47 @@ python main.py
 - Expected Result: Status 200 with a list (possibly empty if no data)
 - Actual Result: Status 200 with list of destinations
 
+<img width="946" height="962" alt="image" src="https://github.com/user-attachments/assets/31bfb880-5a00-4228-bc63-517f87768ddc" />
+
+### Get single Destination
+- Action: GET /destinations/1
+- Expected Result: Status 200 with destination object
+- Actual Result: Status 200 with destination object
+
+<img width="927" height="578" alt="image" src="https://github.com/user-attachments/assets/973832ac-f93b-4f60-a5b6-0f6a89c24db7" />
+
+### Get Single Destination (Invalid ID)
+- Action: GET /destinations/999
+- Expected Result: Status 404 with error message "Destination not found"
+- Actual Result: Status 404 with error message "Destination not found"
+
+<img width="947" height="528" alt="image" src="https://github.com/user-attachments/assets/9e9e0eae-7bfb-4ce1-8265-3c5355944b77" />
+
+### Update Destination
+- Action: PUT /destinations/1 with body:
+**{
+  "destination": "Eiffel Tower Updated",
+  "rating": 5.0
+}**
+- Expected Result: Status 200 with updated fields
+- Actual Result: Status 200 with updated fields
+<img width="938" height="821" alt="image" src="https://github.com/user-attachments/assets/34a10d1b-8bd1-4055-9745-957b47ce5c17" />
+
+### Delete Destination
+- Action: DELETE /destinations/1
+- Expected Result: Status 200 with confirmation message
+- Actual Result: Status 200 with confirmation message
+<img width="957" height="496" alt="image" src="https://github.com/user-attachments/assets/ec4cba44-3221-4c59-9292-3b234b1d2182" />
+
+### Delete Non-existing Destination
+- Action: DELETE /destinations/999
+- Expected Result: Status 404 with error message "Destination not found"
+- Actual Result: Status 404 with error message "Destination not found"
+<img width="955" height="482" alt="image" src="https://github.com/user-attachments/assets/1cbb9c4d-5749-4526-86a8-a21329623fea" />
+
+# Pytest Unit Testing
+
+
 
 
 
