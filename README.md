@@ -128,7 +128,8 @@ python main.py
 - Actual Result: Status 404 with error message "Destination not found"
 <img width="955" height="482" alt="image" src="https://github.com/user-attachments/assets/1cbb9c4d-5749-4526-86a8-a21329623fea" />
 
-# Pytest Unit Testing
+# Pytest Unit Testing (Automated)
+
 
 
 
