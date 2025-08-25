@@ -26,7 +26,6 @@ Supports full CRUD operations and includes both automated tests (pytest) and man
 ## Getting Started
 
 ### 1. Clone the repository
-```bash
 git clone https://github.com/your-username/qa-restapi-testing.git
 cd qa-restapi-testing
 
@@ -115,6 +114,7 @@ python main.py
 - Expected Result: Status 200 with updated fields
 - Actual Result: Status 200 with updated fields
 <img width="938" height="821" alt="image" src="https://github.com/user-attachments/assets/34a10d1b-8bd1-4055-9745-957b47ce5c17" />
+![img1](assets/34a10d1b-8bd1-4055-9745-957b47ce5c17)
 
 ### Delete Destination
 - Action: DELETE /destinations/1
